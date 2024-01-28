@@ -11,10 +11,11 @@
 }
 
 .movie_details-desc {
-  color: aliceblue;
-  max-width: 450px;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  max-width: 550px;
+  background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  border-radius: 15px;
 
   margin-left: 15px;
 }
@@ -23,14 +24,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  gap: 15px;
+  /* background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px); */
 
   margin-left: 15px;
 }
 
 .movie_details-link {
-  color: aliceblue;
+  color: rgb(170, 243, 102);
   text-decoration: none;
+  font-size: 16px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie_details-link:hover {
+  transform: scale(1.1);
 }

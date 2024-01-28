@@ -21,7 +21,7 @@ const HomePage = () => {
 
   return (
     <>
-      <MovieList popular={movie} />
+      <MovieList movieList={movie} />
     </>
   );
 };

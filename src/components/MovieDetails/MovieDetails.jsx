@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 
 import { fetchDetails } from '../../services/api';
 
@@ -9,8 +9,12 @@ const MovieDetails = () => {
   const [film, setFilm] = useState({});
 
   const { movieId } = useParams();
+  const location = useLocation();
+
+  const from = location.state?.from || '/';
 
   useEffect(() => {
+    if (!movieId) return;
     const fetchFilm = async () => {
       try {
         const data = await fetchDetails(movieId);
@@ -23,6 +27,10 @@ const MovieDetails = () => {
     fetchFilm();
   }, [movieId]);
 
+  const defaultImg = film.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${film.backdrop_path}`
+    : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
   return (
     <>
       <div className="movie_details-container">
@@ -31,7 +39,7 @@ const MovieDetails = () => {
             <div
               className="movie_details-flow"
               style={{
-                backgroundImage: `url(https://image.tmdb.org/t/p/original${film.backdrop_path})`,
+                backgroundImage: `url(${defaultImg})`,
                 backgroundSize: 'calc(max(100%, 1000px)) 100%',
                 backgroundRepeat: 'no-repeat',
                 width: '100%',
@@ -53,10 +61,18 @@ const MovieDetails = () => {
               )}
               <p className="movie_details-desc">{film.overview}</p>
               <div className="movie_details-link-cont">
-                <NavLink to="cast" className="movie_details-link">
+                <NavLink
+                  to="cast"
+                  className="movie_details-link"
+                  state={{ from }}
+                >
                   Cast
                 </NavLink>
-                <NavLink to="reviews" className="movie_details-link">
+                <NavLink
+                  to="reviews"
+                  className="movie_details-link"
+                  state={{ from }}
+                >
                   Reviews
                 </NavLink>
               </div>

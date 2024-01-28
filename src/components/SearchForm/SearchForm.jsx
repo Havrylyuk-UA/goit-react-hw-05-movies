@@ -1,19 +1,41 @@
+import { useState } from 'react';
+
 import './SearchForm.css';
 
-const SearchForm = () => {
+const SearchForm = ({ handleSubmit }) => {
+  const [word, setWord] = useState('');
+
+  const handlePushWord = e => {
+    e.preventDefault();
+    handleSubmit(word);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    setWord('');
+  };
+
+  const handleChangeWord = e => {
+    const targetWord = e.target.value.toLowerCase().trim();
+    setWord(targetWord);
+  };
+
   return (
-    <>
-      <form className="search_form">
-        <input
-          type="text"
-          className="search_form-input"
-          placeholder="Please, input movie name"
-        />
-        <button type="submit" className="search_form-btn">
-          Search
-        </button>
-      </form>
-    </>
+    <form className="search_form" onSubmit={handlePushWord}>
+      <input
+        type="text"
+        name="search"
+        autoComplete="off"
+        autoFocus
+        className="search_form-input"
+        placeholder="Please, input movie name"
+        onChange={handleChangeWord}
+        value={word}
+      />
+      <button type="submit" className="search_form-btn">
+        Search
+      </button>
+    </form>
   );
 };
 
