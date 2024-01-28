@@ -1,0 +1,26 @@
+.header {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background-color: inherit;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 28px;
+
+  padding-left: 15px;
+  margin: 0;
+}
+
+.header-link-item {
+  list-style: none;
+}
+
+.header-link {
+  background: linear-gradient(45deg, #ffcc00, #ff3366);
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  text-decoration: none;
+}

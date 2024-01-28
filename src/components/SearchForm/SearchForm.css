@@ -1,0 +1,17 @@
+.search_form {
+  padding-top: 70px;
+  margin-left: 15px;
+}
+
+.search_form-input {
+  /* background-color: inherit; */
+  border: none;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.search_form-btn {
+  border-radius: 10px;
+  padding: 5px;
+}

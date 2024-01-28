@@ -1,0 +1,36 @@
+.movie_details-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.movie_details-flow {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.movie_details-desc {
+  color: aliceblue;
+  max-width: 450px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
+  margin-left: 15px;
+}
+
+.movie_details-link-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
+  margin-left: 15px;
+}
+
+.movie_details-link {
+  color: aliceblue;
+  text-decoration: none;
+}

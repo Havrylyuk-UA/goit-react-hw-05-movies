@@ -1,4 +1,6 @@
-@import-normalize; /* bring in normalize.css styles */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -7,9 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: rgba(0, 0, 0, 0.808);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.search {
+  padding-top: 60px;
 }

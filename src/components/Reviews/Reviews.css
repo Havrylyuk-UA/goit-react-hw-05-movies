@@ -1,0 +1,17 @@
+.movie_review-sheet {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  color: aliceblue;
+
+  height: 360px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.movie_review-item {
+  list-style: none;
+}
+
+.movie_review-desc {
+}
