@@ -4,9 +4,11 @@ import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 import { fetchDetails } from '../../services/api';
 
 import './MovieDetails.css';
+import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [film, setFilm] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const { movieId } = useParams();
   const location = useLocation();
@@ -17,10 +19,13 @@ const MovieDetails = () => {
     if (!movieId) return;
     const fetchFilm = async () => {
       try {
+        setLoading(true);
         const data = await fetchDetails(movieId);
         setFilm(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -34,6 +39,7 @@ const MovieDetails = () => {
   return (
     <>
       <div className="movie_details-container">
+        {loading && <Loader />}
         {film.title && (
           <>
             <div

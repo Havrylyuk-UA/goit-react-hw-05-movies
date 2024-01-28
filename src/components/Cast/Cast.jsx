@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { fetchCast } from '../../services/api';
 
 import './Cast.css';
+import Loader from 'components/Loader/Loader';
 
 const Cast = () => {
   const [actors, setActors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const { movieId } = useParams();
 
@@ -14,11 +16,14 @@ const Cast = () => {
 
     const requestCast = async () => {
       try {
+        setLoading(true);
         const data = await fetchCast(movieId);
 
         setActors(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,6 +35,7 @@ const Cast = () => {
 
   return (
     <>
+      {loading && <Loader />}
       {actors.cast && (
         <ul className="movie_cast-sheet">
           {actors.cast.map(item => (

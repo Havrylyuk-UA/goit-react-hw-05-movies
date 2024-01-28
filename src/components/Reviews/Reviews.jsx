@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { fetchReview } from '../../services/api';
 
 import './Reviews.css';
+import Loader from 'components/Loader/Loader';
 
 const Reviews = () => {
   const [review, setReview] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const { movieId } = useParams();
 
@@ -13,10 +15,13 @@ const Reviews = () => {
     if (!movieId) return;
     const requestReview = async () => {
       try {
+        setLoading(true);
         const data = await fetchReview(movieId);
         setReview(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -24,6 +29,7 @@ const Reviews = () => {
   }, [movieId]);
   return (
     <>
+      {loading && <Loader />}
       {review.results && review.results.length > 0 ? (
         <ul className="movie_review-sheet">
           {review.results.map(item => (

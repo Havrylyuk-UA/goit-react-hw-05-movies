@@ -5,10 +5,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { fetchSearch } from 'services/api';
 
 import '../components/MovieList/MovieList.css';
+import Loader from 'components/Loader/Loader';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useState();
   const [findMovie, setFindMovie] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
 
@@ -16,6 +18,8 @@ const MoviesPage = () => {
     if (!searchParams) return;
     const requestSearch = async () => {
       try {
+        setFindMovie([]);
+        setLoading(true);
         const search = await fetchSearch(searchParams);
 
         if (search.results.length === 0) {
@@ -25,6 +29,8 @@ const MoviesPage = () => {
         setFindMovie(search.results);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     requestSearch();
@@ -37,6 +43,7 @@ const MoviesPage = () => {
     <>
       <SearchForm handleSubmit={setSearchParams} />
       <ul className="movie_list-sheet">
+        {loading && <Loader />}
         {findMovie &&
           findMovie.map(
             ({ id, poster_path, original_title, title, vote_average }) => (
