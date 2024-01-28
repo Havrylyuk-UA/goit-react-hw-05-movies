@@ -17,7 +17,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
-  const from = location.state?.from || '/';
+  const from = location.state.from || '/';
 
   const navigate = useNavigate();
 
@@ -74,10 +74,18 @@ const MovieDetails = () => {
               )}
               <p className="movie_details-desc">{film.overview}</p>
               <div className="movie_details-link-cont">
-                <Link to="cast" className="movie_details-link">
+                <Link
+                  to="cast"
+                  className="movie_details-link"
+                  state={{ from: location.state.from }}
+                >
                   Cast
                 </Link>
-                <Link to="reviews" className="movie_details-link">
+                <Link
+                  to="reviews"
+                  className="movie_details-link"
+                  state={{ from: location.state.from }}
+                >
                   Reviews
                 </Link>
               </div>
