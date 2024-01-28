@@ -7,7 +7,7 @@ const SearchForm = ({ handleSubmit }) => {
 
   const handlePushWord = e => {
     e.preventDefault();
-    handleSubmit(word);
+    handleSubmit(word.toLowerCase().trim());
     clearForm();
   };
 
@@ -16,7 +16,7 @@ const SearchForm = ({ handleSubmit }) => {
   };
 
   const handleChangeWord = e => {
-    const targetWord = e.target.value.toLowerCase().trim();
+    const targetWord = e.target.value;
     setWord(targetWord);
   };
 
