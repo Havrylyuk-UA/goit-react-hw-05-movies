@@ -4,6 +4,7 @@
 }
 
 .movie_details-flow {
+  padding-top: 5%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -45,4 +46,17 @@
 
 .movie_details-link:hover {
   transform: scale(1.1);
+}
+
+.go-back-btn {
+  margin-left: auto;
+  border-radius: 15px;
+  background-color: inherit;
+  border: none;
+  backdrop-filter: blur(10px);
+  color: rgb(61, 253, 253);
+  margin-right: 15px;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

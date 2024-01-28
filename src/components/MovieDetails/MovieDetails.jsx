@@ -1,36 +1,43 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 
 import { fetchDetails } from '../../services/api';
 
 import './MovieDetails.css';
-import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [film, setFilm] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const { movieId } = useParams();
   const location = useLocation();
 
   const from = location.state?.from || '/';
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!movieId) return;
     const fetchFilm = async () => {
       try {
-        setLoading(true);
         const data = await fetchDetails(movieId);
         setFilm(data);
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchFilm();
   }, [movieId]);
+
+  const goBack = () => {
+    navigate(from);
+  };
 
   const defaultImg = film.backdrop_path
     ? `https://image.tmdb.org/t/p/original${film.backdrop_path}`
@@ -38,20 +45,20 @@ const MovieDetails = () => {
 
   return (
     <>
-      <div className="movie_details-container">
-        {loading && <Loader />}
+      <div
+        className="movie_details-container"
+        style={{
+          backgroundImage: `url(${defaultImg})`,
+          backgroundSize: 'calc(max(100%, 1000px)) 100%',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         {film.title && (
           <>
-            <div
-              className="movie_details-flow"
-              style={{
-                backgroundImage: `url(${defaultImg})`,
-                backgroundSize: 'calc(max(100%, 1000px)) 100%',
-                backgroundRepeat: 'no-repeat',
-                width: '100%',
-                height: '100%',
-              }}
-            >
+            <div className="movie_details-flow">
+              <button onClick={goBack} type="button" className="go-back-btn">
+                Go back
+              </button>
               <h2 className="movie_details-desc">{film.title}</h2>
               <p className="movie_details-desc">Rating {film.vote_average}</p>
               <p className="movie_details-desc">Budget: {film.budget}$</p>
@@ -67,20 +74,12 @@ const MovieDetails = () => {
               )}
               <p className="movie_details-desc">{film.overview}</p>
               <div className="movie_details-link-cont">
-                <NavLink
-                  to="cast"
-                  className="movie_details-link"
-                  state={{ from }}
-                >
+                <Link to="cast" className="movie_details-link">
                   Cast
-                </NavLink>
-                <NavLink
-                  to="reviews"
-                  className="movie_details-link"
-                  state={{ from }}
-                >
+                </Link>
+                <Link to="reviews" className="movie_details-link">
                   Reviews
-                </NavLink>
+                </Link>
               </div>
               <Outlet />
             </div>
